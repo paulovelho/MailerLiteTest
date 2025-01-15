@@ -1,1 +1,27 @@
-<p>builder works!</p>
+<div class="container">
+	<div class="grid builder">
+		<div class="col-12 sm:col-3 blocks-container">
+			<div class="block-list">
+				<ul>
+					<li pDraggable (onDragStart)="dragStart('text')"><app-text-placeholder /></li>
+					<li pDraggable (onDragStart)="dragStart('image')"><app-image-placeholder /></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-12 sm:col-9">
+
+			<div class="page">
+				<div
+					*ngFor="let item of page; index as i"
+					class="page-item"
+				>
+					<div class="dropzone" pDroppable (onDrop)="addBlock($event, i)"></div>
+					<app-image-block *ngIf="item.type == 'image'" />
+					<app-text-block *ngIf="item.type == 'text'" />
+				</div>
+				<div class="dropzone last-dropzone" pDroppable (onDrop)="addBlock($event, page.length)"></div>
+			</div>
+
+		</div>
+	</div>	
+</div>
