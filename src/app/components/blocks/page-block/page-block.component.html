@@ -1,0 +1,37 @@
+<p-panel>
+	<ng-template pTemplate="header">
+	</ng-template>
+	<ng-template pTemplate="icons">
+		<i
+			*ngIf="showMoveUp"
+			class="fa fa-caret-up icon-action"
+			pTooltip="move up" tooltipPosition="top"
+			(click)="moveUp.emit()"
+		></i>
+		<i
+			*ngIf="showMoveDown"
+			class="fa fa-caret-down icon-action"
+			pTooltip="move down" tooltipPosition="top"
+			(click)="moveDown.emit()"
+		></i>
+		<span class="space">|</span>
+		<i
+			class="fa fa-trash icon-action"
+			pTooltip="delete" tooltipPosition="top"
+			(click)="trash.emit()"
+		></i>
+		<i
+			class="fa fa-edit icon-action"
+			pTooltip="edit" tooltipPosition="top"
+			(click)="edit.emit()"
+		></i>
+		<i
+			class="fa fa-clone icon-action"
+			pTooltip="clone" tooltipPosition="top"
+			(click)="clone.emit()"
+		></i>
+	</ng-template>
+	<div class="content">
+		<ng-content></ng-content>
+	</div>
+</p-panel>

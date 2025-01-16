@@ -3,8 +3,13 @@
 		<div class="col-12 sm:col-3 blocks-container">
 			<div class="block-list">
 				<ul>
-					<li pDraggable (onDragStart)="dragStart('text')"><app-text-placeholder /></li>
-					<li pDraggable (onDragStart)="dragStart('image')"><app-image-placeholder /></li>
+					<li pDraggable
+						(onDragStart)="newElementStart('text')"
+					><app-text-placeholder /></li>
+					<li pDraggable
+						(onDragStart)="newElementStart('image')"
+						(onDragEnd)="clearDrag()"
+					><app-image-placeholder /></li>
 				</ul>
 			</div>
 		</div>
@@ -13,11 +18,24 @@
 			<div class="page">
 				<div
 					*ngFor="let item of page; index as i"
-					class="page-item"
+					class="page-item el-{{i}}"
 				>
 					<div class="dropzone" pDroppable (onDrop)="addBlock($event, i)"></div>
-					<app-image-block *ngIf="item.type == 'image'" />
-					<app-text-block *ngIf="item.type == 'text'" />
+					<app-page-block
+						[position]="i"
+						[showMoveUp]="i != 0 "
+						[showMoveDown]="i != (page.length - 1)"
+						(moveUp)="moveUp(i)"
+						(moveDown)="moveDown(i)"
+						(dragStart)="moveElementStart(i)"
+						(dragEnd)="clearDrag"
+						(trash)="remove(i)"
+						(clone)="clone(i)"
+						(edit)="edit(i)"
+					>
+						<app-image-block *ngIf="item.type == 'image'" />
+						<app-text-block *ngIf="item.type == 'text'" />
+					</app-page-block>
 				</div>
 				<div class="dropzone last-dropzone" pDroppable (onDrop)="addBlock($event, page.length)"></div>
 			</div>
