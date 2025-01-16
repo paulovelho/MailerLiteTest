@@ -6,11 +6,12 @@ import { TextPlaceholderComponent } from '../blocks/text/text-placeholder/text-p
 import { ImageBlockComponent } from "../blocks/image/image-block/image-block.component";
 import { TextBlockComponent } from "../blocks/text/text-block/text-block.component";
 import { PageBlockComponent } from "../blocks/page-block/page-block.component";
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ImageEditComponent } from '../blocks/image/image-edit/image-edit.component';
 import { TextEditComponent } from '../blocks/text/text-edit/text-edit.component';
 import { TextService } from '../blocks/text/text.service';
 import { ButtonModule } from 'primeng/button';
+import { ImageService } from '../blocks/image/image.service';
 
 type blockType = "image" | "text";
 interface pageItem {
@@ -50,9 +51,6 @@ export class BuilderComponent implements OnInit {
 	ngOnInit(): void {
 		this.addPageItem("image");
 		this.addPageItem("text");
-		this.addPageItem("text");
-		this.addPageItem("image");
-		this.addPageItem("text");
 	}
 
 	private addPageItem(type: blockType) {
@@ -62,6 +60,8 @@ export class BuilderComponent implements OnInit {
 		let data = {};
 		if (type == "text") {
 			data = { content: TextService.getRandomQuote() };
+		} else {
+			data = { image: ImageService.getRandomImage() };
 		}
 		return {
 			type, data,
@@ -85,12 +85,8 @@ export class BuilderComponent implements OnInit {
 		);
 	}
 
-	public edit(position: number) {
-		const item: pageItem = this.page[position];
-		const component = item.type == "image" ? ImageEditComponent : TextEditComponent;
-
-		this.dialog.open(component, {
-			data: item.data,
+	private getModalData() {
+		return {
 			modal: true,
 			draggable: true,
 			resizable: true,
@@ -98,8 +94,14 @@ export class BuilderComponent implements OnInit {
 			closeOnEscape: true,
 			closable: false,
 			width: '720px',
-		})
-			.onClose.subscribe(rs => {
+		};
+	}
+	public openModalText = (item: pageItem): DynamicDialogRef => this.dialog.open(TextEditComponent, { data: item.data, ...this.getModalData() });
+	public openModalImage = (item: pageItem): DynamicDialogRef => this.dialog.open(ImageEditComponent, { data: item.data, ...this.getModalData() });
+	public edit(position: number) {
+		const item: pageItem = this.page[position];
+		const dialog = item.type == "image" ? this.openModalImage(item) : this.openModalText(item);
+		dialog.onClose.subscribe(rs => {
 				if (!rs) return;
 				this.page[position].data = rs;
 			});
@@ -148,7 +150,6 @@ export class BuilderComponent implements OnInit {
 		this.moveElementIndex = null;
 	}
 
-	public save() {
-		console.log("saving: ", this.page);
-	}
+	public clear = () => this.page = [];
+	public save = () => console.log("saving: ", this.page);
 }

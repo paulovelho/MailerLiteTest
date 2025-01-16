@@ -1,1 +1,30 @@
-<p>image-edit works!</p>
+<div class="container">
+	<div class="row grid">
+		<div class="col-12 sm:col-6 main-image">
+			<img [src]="image" />
+		</div>
+		<div class="col-12 sm:col-6 image-selector">
+			<div class="flex flex-wrap justify-content-evenly">
+				<div *ngFor="let image of availableImages" class="img-thumb">
+					<img [src]="image" (click)="selectImage(image)" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row grid mt-4">
+		<div class="col-offset-6 col-3">
+			<button pButton pRipple severity="danger" class="m-auto w-full" (click)="escape()">
+				<span class="m-auto">
+					<i class="fa fa-window-close mr-2"></i> Cancel
+				</span>
+			</button>
+		</div>
+		<div class="col-3">
+			<button pButton pRipple severity="success" class="m-auto w-full" (click)="save()">
+				<span class="m-auto">
+					<i class="fa fa-save mr-2"></i> Save
+				</span>
+			</button>
+		</div>
+	</div>
+</div>

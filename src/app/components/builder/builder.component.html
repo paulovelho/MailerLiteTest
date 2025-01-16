@@ -11,6 +11,11 @@
 						(onDragEnd)="clearDrag()"
 					><app-image-placeholder /></li>
 				</ul>
+				<button pButton pRipple severity="warning" class="m-auto w-full mt-4" (click)="clear()">
+					<span class="m-auto">
+						<i class="fa fa-minus-circle mr-2"></i> Clear
+					</span>
+				</button>
 				<button pButton pRipple severity="success" class="m-auto w-full mt-4" (click)="save()">
 					<span class="m-auto">
 						<i class="fa fa-save mr-2"></i> Save
@@ -38,7 +43,7 @@
 						(clone)="clone(i)"
 						(edit)="edit(i)"
 					>
-						<app-image-block *ngIf="item.type == 'image'" />
+						<app-image-block [data]="item.data" *ngIf="item.type == 'image'" />
 						<app-text-block [data]="item.data" *ngIf="item.type == 'text'" />
 					</app-page-block>
 				</div>

@@ -1,14 +1,46 @@
 <div class="container">
-	<p-editor [(ngModel)]="content" [style]="{ height: '320px' }" />
+	<p-editor [(ngModel)]="content" [style]="{ height: '320px' }">
+		<ng-template pTemplate="header">
+			<span class="ql-formats">
+				<select class="ql-size">
+					<option value="small">Small</option>
+					<option selected></option>
+					<option value="large">Large</option>
+					<option value="huge">Huge</option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-bold" aria-label="Bold"></button>
+				<button class="ql-italic" aria-label="Italic"></button>
+				<button class="ql-underline" aria-label="Underline"></button>
+				<button class="ql-strike" aria-label="Strike"></button>
+			</span>
+			<span class="ql-formats">
+				<select title="Text Alignment" class="ql-align">
+					<option selected>Left</option>
+					<option value="center" label="Center"></option>
+					<option value="right" label="Right"></option>
+					<option value="justify" label="Justify"></option>
+				</select>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-link"></button>
+			</span>
+		</ng-template>
+	</p-editor>
 	<div class="row grid mt-4">
 		<div class="col-offset-6 col-3">
-			<button pButton pRipple severity="danger" class="m-auto" (click)="escape()">
-				<i class="fa fa-window-close mr-2"></i> Cancel
+			<button pButton pRipple severity="danger" class="m-auto w-full" (click)="escape()">
+				<span class="m-auto">
+					<i class="fa fa-window-close mr-2"></i> Cancel
+				</span>
 			</button>
 		</div>
 		<div class="col-3">
-			<button pButton pRipple severity="success" class="m-auto" (click)="save()">
-				<i class="fa fa-save mr-2"></i> Save
+			<button pButton pRipple severity="success" class="m-auto w-full" (click)="save()">
+				<span class="m-auto">
+					<i class="fa fa-save mr-2"></i> Save
+				</span>
 			</button>
 		</div>
 	</div>
