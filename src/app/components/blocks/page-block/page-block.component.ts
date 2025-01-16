@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations'
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { PanelModule } from 'primeng/panel';
 import { TooltipModule } from 'primeng/tooltip';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
 	selector: 'app-page-block',
@@ -30,5 +28,6 @@ export class PageBlockComponent {
 	constructor(
 	) {
 	}
+
 
 }

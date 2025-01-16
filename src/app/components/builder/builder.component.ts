@@ -9,6 +9,8 @@ import { PageBlockComponent } from "../blocks/page-block/page-block.component";
 import { DialogService } from 'primeng/dynamicdialog';
 import { ImageEditComponent } from '../blocks/image/image-edit/image-edit.component';
 import { TextEditComponent } from '../blocks/text/text-edit/text-edit.component';
+import { TextService } from '../blocks/text/text.service';
+import { ButtonModule } from 'primeng/button';
 
 type blockType = "image" | "text";
 interface pageItem {
@@ -21,13 +23,14 @@ interface pageItem {
 	selector: 'app-builder',
 	standalone: true,
 	imports: [
-    SharedModule,
-    TextPlaceholderComponent,
-    ImagePlaceholderComponent,
-    DragDropModule,
-    ImageBlockComponent,
-    TextBlockComponent,
-    PageBlockComponent,
+		SharedModule,
+		ButtonModule,
+		DragDropModule,
+		PageBlockComponent,
+		TextBlockComponent,
+		ImageBlockComponent,
+		TextPlaceholderComponent,
+		ImagePlaceholderComponent,
 	],
 	providers: [
 		DialogService,
@@ -38,7 +41,7 @@ interface pageItem {
 export class BuilderComponent implements OnInit {
 	public newElementType?: blockType | null;
 	public moveElementIndex?: number | null;
-	public page:pageItem[] = [];
+	public page: pageItem[] = [];
 
 	constructor(
 		private dialog: DialogService,
@@ -52,18 +55,21 @@ export class BuilderComponent implements OnInit {
 		this.addPageItem("text");
 	}
 
-	private addPageItem(type:blockType) {
+	private addPageItem(type: blockType) {
 		this.page.push(this.getPageItem(type));
 	}
-	private getPageItem(type:blockType, position?:number) {
+	private getPageItem(type: blockType, position?: number) {
+		let data = {};
+		if (type == "text") {
+			data = { content: TextService.getRandomQuote() };
+		}
 		return {
-			type,
-			data: {},
+			type, data,
 			order: position ?? this.page.length,
 		};
 	}
 
-	public addItemAtPosition(item:pageItem, position:number) {
+	public addItemAtPosition(item: pageItem, position: number) {
 		this.page = [
 			...this.page?.slice(0, position),
 			item,
@@ -79,8 +85,8 @@ export class BuilderComponent implements OnInit {
 		);
 	}
 
-	public edit(position:number) {
-		const item:pageItem = this.page[position];
+	public edit(position: number) {
+		const item: pageItem = this.page[position];
 		const component = item.type == "image" ? ImageEditComponent : TextEditComponent;
 
 		this.dialog.open(component, {
@@ -90,55 +96,59 @@ export class BuilderComponent implements OnInit {
 			resizable: true,
 			maximizable: true,
 			closeOnEscape: true,
-			width: '650px',
+			closable: false,
+			width: '720px',
 		})
-		.onClose.subscribe(rs => {
-			console.info("rs: ", rs);
-		});
+			.onClose.subscribe(rs => {
+				if (!rs) return;
+				this.page[position].data = rs;
+			});
 	}
 
 	private normalize() {
 		this.page = this.page.map((c, index) => { c.order = index; return c; });
-		console.info("normalized: ", this.page);
 	}
 
-	public remove(position:number) {
+	public remove(position: number) {
 		this.page.splice(position, 1);
 		this.normalize();
 	}
 
 	public clone(position: number) {
 		const item = this.page[position];
-		console.info("cloning ", item);
-		let newItem = {...item};
+		let newItem = { ...item };
 		const newPosition = position + 1;
 		newItem.order = newPosition;
 		this.addItemAtPosition(newItem, newPosition);
 	}
 
-	public changeOrder(from:number, to:number) {
-		this.page.splice(to,0,this.page.splice(from,1)[0]);
+	public changeOrder(from: number, to: number) {
+		this.page.splice(to, 0, this.page.splice(from, 1)[0]);
 		this.normalize();
 	}
 
-	public moveUp(pos:number) {
-		if(pos == 0) return;
-		this.changeOrder(pos, pos-1);
+	public moveUp(pos: number) {
+		if (pos == 0) return;
+		this.changeOrder(pos, pos - 1);
 	}
-	public moveDown(pos:number) {
-		if(pos == this.page.length) return;
-		this.changeOrder(pos, pos+1);
+	public moveDown(pos: number) {
+		if (pos == this.page.length) return;
+		this.changeOrder(pos, pos + 1);
 	}
 
 
-	public newElementStart(type:blockType) {
+	public newElementStart(type: blockType) {
 		this.newElementType = type;
 	}
-	public moveElementStart(index:number) {
+	public moveElementStart(index: number) {
 		this.moveElementIndex = index;
 	}
 	public clearDrag() {
 		this.newElementType = null;
 		this.moveElementIndex = null;
+	}
+
+	public save() {
+		console.log("saving: ", this.page);
 	}
 }

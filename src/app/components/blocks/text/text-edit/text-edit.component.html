@@ -1,1 +1,15 @@
-<p>text-edit works!</p>
+<div class="container">
+	<p-editor [(ngModel)]="content" [style]="{ height: '320px' }" />
+	<div class="row grid mt-4">
+		<div class="col-offset-6 col-3">
+			<button pButton pRipple severity="danger" class="m-auto" (click)="escape()">
+				<i class="fa fa-window-close mr-2"></i> Cancel
+			</button>
+		</div>
+		<div class="col-3">
+			<button pButton pRipple severity="success" class="m-auto" (click)="save()">
+				<i class="fa fa-save mr-2"></i> Save
+			</button>
+		</div>
+	</div>
+</div>
