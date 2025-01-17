@@ -3,21 +3,21 @@
 Build a simple drag & drop landing page builder using any of Vue.js, Angular, React. Extra points for using Vue.js.
 
 ## Requirements:
-[X] Create 2 draggable blocks: Text and Image.
-[X] The content of Text block should be editable.
-[X] Image block can be edited by selecting one of the 3-4 predefined images.
-[X] The user should be able to rearrange, duplicate and delete blocks.
-[X] Landing page data like the text content, links to images, block order, etc. should be exported to a JSON format when the user clicks the “Save” button (console.log is enough).
-[X] Style the application using CSS or a CSS framework of your choice (e.g., Tailwind CSS).
-[X] The application should be responsive.
-[ ] Test cases are a bonus.
+- [X] Create 2 draggable blocks: Text and Image.
+- [X] The content of Text block should be editable.
+- [X] Image block can be edited by selecting one of the 3-4 predefined images.
+- [X] The user should be able to rearrange, duplicate and delete blocks.
+- [X] Landing page data like the text content, links to images, block order, etc. should be exported to a JSON format when the user clicks the “Save” button (console.log is enough).
+- [X] Style the application using CSS or a CSS framework of your choice (e.g., Tailwind CSS).
+- [X] The application should be responsive.
+- [ ] Test cases are a bonus.
 
 ## Instructions:
-[X] Set up a new project.
-[ ] Implement the required features based on the given requirements.
-[X] Commit your changes regularly, with clear and descriptive commit messages.
-[ ] Push your final implementation to your repository.
-[ ] Provide the repository URL for review.
+- Set up a new project.
+- Implement the required features based on the given requirements.
+- Commit your changes regularly, with clear and descriptive commit messages.
+- Push your final implementation to your repository.
+- Provide the repository URL for review.
 
 Note: Feel free to use any additional libraries, tools, or plugins that you think would enhance the application.
 
