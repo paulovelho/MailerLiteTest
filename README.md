@@ -25,6 +25,37 @@ Note: Feel free to use any additional libraries, tools, or plugins that you thin
 **Delivery:** When the task is ready, please share the repository URL for review by email. 
 
 ---
+
+## MailerLite feedback
+
+**I failed at their process.**
+I totally understand and respect them for it: Any company that decides not to hire me is doing something right (hi, potential recruiter that is looking at my profile, how are you?).
+But, if you are working on MailerLite application process, there are one thing or other that you might learn from their feedback:
+
+
+#### Things well completed:
+- Functionalities such as drag, clone, delete, and export are working well
+- The design adapts well to mobile devices
+-
+#### Areas for improvement (aspects that were missing or were not completed well):
+- console warnings were present
+- text editing in a modal
+- 5 unused dependancies (npx depcheck)
+- while tests are present, they are not running successfully
+- commits could be more structured; all changes are condensed into eight commits, including one solely for the README.
+
+### Regarding their feedback:
+- console warnings are present when you run the project in developer mode (I imagine they did it).
+- indeed, text is being edited in a modal. Couldn't it? Is it a problem? Is it considered "not completed well"?
+- 5 unused dependencies: yeah, my bad. they are right on this one.
+- tests presented are the default ones created by angular cli. I though I was clear (I was, you can see in the checkbox above) that tests are not implemented.
+- commits were done as I was working on it (in a bunch of 10 minutes sessions through 4 days). maybe they're right about this one too, but I think that eight commits in 4 days is a good rate.
+
+
+so, if you're in the middle of their application process, pay attention to this issues.
+
+
+---
 ## Angular Project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
