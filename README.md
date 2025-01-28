@@ -36,7 +36,7 @@ But, if you are working on MailerLite application process, there are one thing o
 #### Things well completed:
 - Functionalities such as drag, clone, delete, and export are working well
 - The design adapts well to mobile devices
--
+
 #### Areas for improvement (aspects that were missing or were not completed well):
 - console warnings were present
 - text editing in a modal
